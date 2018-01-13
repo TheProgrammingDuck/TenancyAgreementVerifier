@@ -1,5 +1,5 @@
 pragma solidity ^0.4.0;
-contract LandLordContract {
+contract Tenancy {
 
     struct Tenant {
         bytes32 name;   // short name (up to 32 bytes)
@@ -16,12 +16,16 @@ contract LandLordContract {
     uint256 public voteYes = 0;
     uint256 public voteNo = 0;
 
+
     event LogPaymentMade(address accountAddress, uint amount);
     event LogAddTenant(address tenantAddress, bytes32 nameToAdd);
 
-    function LandLordContract(uint _totalRentPrice) {
+    function Tenancy(uint _totalRentPrice) {
         landlord = msg.sender;
         totalRentPrice = _totalRentPrice;
+
+        //initialise the coin contract
+
     }
 
     function addTenant(address t, bytes32 nameToAdd, uint owed, uint paid) {
@@ -92,9 +96,11 @@ contract LandLordContract {
 
     }
 
-
+    //give them coins and rest voters[msg.sender] or something
     function renewVote(){
-        
+
     }
+
+    //create a way of minting and distributing coins, like a buy function or something like in the crowdsale.sol
 
 }
