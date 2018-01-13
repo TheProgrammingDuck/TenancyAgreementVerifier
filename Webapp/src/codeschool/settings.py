@@ -25,7 +25,7 @@ SECRET_KEY = 'e_+2h)90kv@ahl#o94^o6^u$s6=&l2o_!!1z7ss695akk_zj89'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.177.100.93', '172.26.15.18']
+ALLOWED_HOSTS = ['35.177.100.93', '172.26.15.18', '127.0.0.1']
 
 
 # Application definition
@@ -74,6 +74,7 @@ WSGI_APPLICATION = 'codeschool.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -81,9 +82,10 @@ DATABASES = {
         'USER': 'username',
         'PASSWORD': 'pass1234',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '8080',
     }
 }
+"""
 
 
 # Password validation
