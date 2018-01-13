@@ -1,0 +1,264 @@
+{% extends 'header.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<body data-spy="scroll" data-target=".navbar-fixed-top" id="page-top">
+
+    <script type="text/javascript">
+        window.addEventListener('load', function() {
+
+      // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+        if (typeof web3 !== 'undefined') {
+        // Use Mist/MetaMask's provider
+            window.web3 = new Web3(web3.currentProvider);
+            console.log('metamask!!');
+        } else {
+            console.log('No web3? You should consider trying MetaMask!')
+        // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+            window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        }
+
+        })
+
+    </script>
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="navbar-container">
+            <div class="navbar-header">
+                <div class="custom-logo"><img src="{% static '/img/custom-logo.png' %}" style="display:inline-block;margin-bottom:26px;" height="33" width="39" ></div><button class="navbar-toggle" data-target=".navbar-main-collapse" data-toggle="collapse" type="button"><i class="fa fa-bars"></i></button> <a class="navbar-brand page-scroll" href="#page-top"><span class="custom-brand">custom</span></a>
+            </div><!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="http://invite.custom.net">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#team">Team</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                    <li>
+                        <a href="http://medium.com/@customproject">Blog</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav>
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="col-md-12">
+                    <h1 class="brand-heading">Aquilla Blockchain Recruitment</h1>
+                    <p class="intro-text">Aquilla is a boutique fintech recruitment firm with a difference.
+                    We focus on providing candidates to our clients that have proved themselves through our own stringent testing processes designed by experts in fintech.</p><a href="https://app.custom.net"><button class="join_beta">Aquilla for businesses</button></a><br>
+                    <br>
+                    <button onclick="approveTransaction(9, '0xcdc206682fc736d37571300519cf4a2c068e4790')">Approve</button>
+                    <button onclick="setTrade(8, window.web3.eth.accounts[8])">Set Trade</button>
+                    <button onclick="executeTrade(9, window.web3.eth.accounts[0], 10)">Execute Trade</button>
+                    
+                    <br>
+                    <br>
+                    <div class="intro-video" data-target="#video-modal" data-toggle="modal">
+                        <span class="video-label">Aquilla for candidates</span> <i class="fa fa-play-circle-o fa-1x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="content-section text-center subscribe-content-section" id="subscribe">
+        <div class="subscribe-section">
+            <div class="container subscribe-container">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h1>Subscribe for updates about custom</h1>
+                    <form id="mailinglist-form" name="mailinglist-form">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control" id="email-address" placeholder="Your email address" type="text"> <span class="input-group-btn"><button class="btn btn-info" id="mailinglist-signup" type="button"><span class="input-group-btn"><i class="fa fa-angle-right fa-1x"></i></span></button></span>
+                            </div>
+                            <div id="signed-up"></div>
+                        </div>
+                    </form>
+                    <p class="no-sharing">We won't share your email address or send you any spam - we promise!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container content-section about-content-section" id="about">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>In a business efficency is key</h2>
+                <p>Thats why we focus on sourcing top notch talent. We help reduce the time spent in dead end interviews searching for that 'needle in a haystack' candidate.</p>
+                <h3><img class="icon" src="{% static 'img/health-graph-1@2x.png' %}">Detailed technical assessment to source the best in blockchain.</h3>
+                <p>Blockchain technology is young and as a result there is a high noise to signal ratio when it comes to making sure a candidate has the necessary skills and aptititude for the job. Our custom built assessment scheme insures that we will only ever offer a business the very best candidates.</p>
+                <h3><img class="icon" src="{% static 'img/coin-stack-1@2x.png' %}"></h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec elementum quam. Mauris in libero ac ipsum rhoncus porta vitae et nulla. Duis ullamcorper turpis eget ultricies dignissim. Suspendisse id erat suscipit, hendrerit ligula sed, dapibus eros. Aenean eu odio felis. Mauris viverra efficitur convallis. Aenean sed purus ut leo imperdiet aliquam. Duis tristique fringilla diam ut posuere. Nunc ornare nulla sed dapibus lobortis. Nam mauris lacus, eleifend at finibus sed, elementum ac enim. Donec urna lacus, placerat quis blandit nec, mollis eu sem. Cras viverra magna metus, id hendrerit erat blandit nec. Suspendisse potenti.</p>
+            </div>
+        </div>
+    </section>
+    <section class="content-section" id="download">
+        <div class="download-section">
+            <div class="container">
+                <div class="col-md-12">
+                    <h2>Stunningly accurate forecasts on any topic</h2>
+                    <p>cLorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec elementum quam. Mauris in libero.</p>
+                    <p>TLorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec elementum quam. Mauris in libero ac ipsum rh.</p>
+                    <p>ligula sed, dapibus eros. Aenean eu odio felis. Mauris viverra efficitur convallis. Aenean sed purus ut leo imperdiet aliquam. Duis tristique fringilla diam ut posuere. Nunc ornare nulla sed dapibus lobortis. Nam mauris lacus, eleifend at finibus sed, elementum ac enim. Donec urna lacus, placerat quis blandit nec, mollis eu sem. Cras viverra magna metus, id hendrerit erat blandit nec. Suspendisse potenti.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content-section" id="decentralization">
+        <div class="decentralization-section">
+            <div class="container">
+                <div class="col-md-12">
+                    <h2>Decentralization: custom's secret weapon</h2>
+                    <p>Lorem ipsum dolor sit amet,.</p>
+                    <h3><img class="icon" src="{% static 'img/server-close-1@2x.png' %}">No central servers</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec elementum quam. Mauris in libero ac ipsum rhoncus porta vitae et nulla. Duis ullamcorper turpis eget ultricies dignissim. Suspendisse id era.</p>
+                    <h3><img class="icon" src="{% static 'img/graduation-hat@2x.png' %}">Create your own markets</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec elementum quam. Mauris in libero ac ipsum rhoncus porta vitae et nulla. Duis ullamcorper turpis eget ultricies dignissim. .</p>
+                    <h3><img class="icon" src="{% static 'img/bank-note@2x.png' %}">Low fees</h3>
+                    <p>Suspendisse id erat suscipit, hendrerit ligula sed, dapibus eros. Aenean eu odio felis. Mauris viverra efficitur convallis. Aenea</p>
+                    <h3><img class="icon" src="{% static 'img/check-mark@2x.png' %}">Crowdsourced reporting</h3>
+                    <p>Suspendisse id erat suscipit, hendrerit ligula sed, dapibus eros. Aenean eu odio felis. Mauris viverra efficitur convallis. Aenean sed purus ut leo imperdiet aliquam. Duis tristique fringilla diam ut posuere. Nunc ornare nulla sed dapibus lobortis. Nam mauris lacus, eleifend at finibus sed, elementum ac enim. Donec urna lacus, placerat quis blandit nec, mollis eu sem. Cras viverra magna metus, id hendrerit erat blandit nec. Suspendisse potenti <span class="rep-video" data-target="#rep-video-modal" data-toggle="modal"><span class="rep-video-label">The full scoop on REP</span> <i class="fa fa-play-circle-o fa-1x"></i></span></p>
+                    <h3><img class="icon" src="{% static 'img/banking-spendings-3@2x.png' %}">Safe, automated payments</h3>
+                    <p>Suspendisse id erat suscipit, hendrerit ligula sed, dapibus eros. Aenean eu odio felis. Mauris viverra efficitur convallis. Aenean sed purus ut leo imperdiet aliquam. Duis tristique fringilla diam ut t nec, mollis eu sem. Cras viverra magna metus, id hendrerit erat blandit nec. Suspendisse potenti</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content-section" id="try">
+        <div class="try-section">
+            <div class="container">
+                <div class="col-md-12">
+                    <h2>Try custom now...for free!</h2>
+                    <p>Suspendisse id erat suscipit, hendrerit ligula sed, dapibus eros. Aenean eu odio felis. Mauris viverra efficitur convallis. Aenean sed purus ut leo imperdiet aliquam. Duis tristique fringilla diam ut posuere. Nunc ornare nulla sed dapibus lobortis. Nam mauris lacus, eleifend at finibus sed, elementum ac enim. Donec urna lacus, placerat quis blandit nec, mollis eu sem. Cras viverra magna metus, id hendrerit erat blandit nec. Suspendisse potenti</p>
+                    <div class="join-custom-beta-button">
+                        <a href="https://app.custom.net">Join custom Beta - Free!</a>
+                    </div>
+                    <p>No cost and no deposit required - it's all just play money during beta testing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content-section text-center" id="team">
+        <div class="team-section">
+            <div class="container">
+                <div class="team-header">
+                    <h1>The custom Team</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="intro-profile" data-target="#profile-modal-jack" data-toggle="modal">
+                            <div class="profile col-md-6">
+                                <img class="large-profile-pic" src="{% static 'img/alex.jpg' %}">
+                                <h3>Jack Peterson, PhD<br>
+                                <small>Co-founder &amp; Lead Developer</small></h3>
+                            </div>
+                        </div>
+                        <div class="intro-profile" data-target="#profile-modal-joey" data-toggle="modal">
+                            <div class="profile col-md-6">
+                                <img class="large-profile-pic" src="{% static 'img/alex.jpg' %}">
+                                <h3>Joey Krug<br>
+                                <small>Co-founder &amp; Senior Back-End Developer</small></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+            </div>
+        </div>
+    </section>
+    <section class="content-section contact-section" id="contact">
+        <div class="container">
+
+            <div class="row">
+         
+                <div class="col-md-12">
+                
+                    <div class="col-sm-4" style="
+    width:300px;
+    position:absolute;
+    margin:auto;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;">
+                        <ul class="nostyle">
+                            <li>
+                                <ul class="nostyle social-media">
+                                    <li>
+                                        <a href="https://www.facebook.com/customproject" target="_blank"><i class="fa fa-facebook fa-2x"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://twitter.com/customProject" target="_blank"><i class="fa fa-twitter fa-2x"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.reddit.com/r/custom" target="_blank"><i class="fa fa-reddit fa-2x"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://github.com/customProject" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.youtube.com/channel/UCnQRWIWIT8ExlegLTajjhiQ" target="_blank"><i class="fa fa-youtube fa-2x"></i></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div aria-hidden="true" aria-labelledby="video-modal-label" class="modal fade" id="video-modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content video-modal-content">
+                <div class="modal-body">
+                    <iframe allowfullscreen frameborder="0" height="315" src="https://www.youtube.com/embed/yegyih591Jo" width="560"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <div aria-hidden="true" aria-labelledby="profile-modal-label" class="modal fade" id="profile-modal-jack" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content profile-modal-content">
+                <div class="modal-header profile-modal-header">
+                    <img class="large-profile-pic" src="{%static 'img/alex.jpg' %}">
+                    <h2>Joey Krug<br>
+                    <small>Co-founder &amp; Senior Back-End Developer</small></h2>
+                </div>
+                <div class="profile-modal-body">
+                    <p>Suspendisse id erat suscipit, hendrerit ligula sed, dapibus eros. Aenean eu odio felis. Mauris viverra efficitur convallis. Aenean sed purus ut leo imperdiet aliquam. Duis tristique fringilla diam ut posuere. Nunc ornare nulla sed dapibus lobortis. Nam mauris lacus, eleifend at finibus sed, elementum ac enim. Donec urna lacus, placerat quis blandit nec, mollis eu sem. Cras viverra magna metus, id hendrerit erat blandit nec. Suspendisse potenti</p>
+                    <ul class="nostyle social-media social-media-profile">
+                        <li>
+                            <a href="https://github.com/joeykrug"><i class="fa fa-github fa-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="http://twitter.com/joeykrug447"><i class="fa fa-twitter fa-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="http://www.linkedin.com/in/joeykrug/en"><i class="fa fa-linkedin fa-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.reddit.com/user/joeykrug"><i class="fa fa-reddit fa-2x"></i></a>
+                        </li>
+                    </ul><button class="dismiss" data-dismiss="modal">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+{% endblock %}
+

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	{% load staticfiles %}
+
+	<title>Code school</title>
+	<link rel='shortcut icon' href="{% static 'img/favicon.ico' %}" type='image/x-icon' />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="custom is a decentralized prediction market built on the Ethereum blockchain. It allows you to forecast events and be rewarded for predicting them correctly." name="description">
+    <meta content="Decentralized Prediction Market | custom Project" property="og:title">
+    <meta content="custom is a decentralized prediction market built on the Ethereum blockchain. It allows you to forecast events and be rewarded for predicting them correctly." property="og:description">
+    <meta content="custom | Decentralized Prediction Markets" property="og:site_name">
+    <meta content="https://www.custom.net" property="og:url">
+    <meta content="https://custom.net/img/meta_logo.png" property="og:image">
+    <meta content="custom | Decentralized Prediction Markets" name="twitter:card">
+    <meta content="custom is a decentralized prediction market built on the Ethereum blockchain. It allows you to forecast events and be rewarded for predicting them correctly." name="twitter:description">
+    <meta content="custom | Decentralized Prediction Markets" name="twitter:title">
+    <meta content="custom" name="twitter:domain">
+    <meta content="#da532c" name="msapplication-TileColor">
+    <meta content="img/icons/mstile-144x144.png" name="msapplication-TileImage">
+    <title>Decentralized Prediction Markets | custom Project</title>
+	
+    <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="{% static 'js/augur.js' %}"> </script> 
+	<script src="{% static 'js/uservoice.js' %}"> </script> 
+	<script src="{% static 'js/jquery.easing.min.js' %}"> </script> 
+	<script src="{% static 'js/web3.min.js' %}"> </script>
+	<script src="{% static 'js/block.js' %}"> </script> 
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+	
+	{% block content %}
+	{% endblock %}
+	
+	<footer class="container-fluid-footer bg-4 text-center">
+	  <p>&copy;	Flinn 2017</p>
+	</footer>
+	<p></p>
+</body>
+
+</html>

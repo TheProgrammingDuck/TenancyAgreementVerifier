@@ -1,0 +1,267 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../static/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+					<script
+  				src="https://code.jquery.com/jquery-1.12.4.min.js"
+  				integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  				crossorigin="anonymous"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+	        window.addEventListener('load', function() {
+
+	      // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+	        if (typeof web3 !== 'undefined') {
+	        // Use Mist/MetaMask's provider
+	            window.web3 = new Web3(web3.currentProvider);
+	            //console.log('MetaMask');
+	            //window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+	        } else {
+	            console.log('No web3? You should consider trying MetaMask!')
+	        // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+	            window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+	        }
+
+	        })
+
+   		 </script>
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Kitty Market</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+						<header>
+							<div class="inner">
+								<h2>The CryptoKitty Market</h2>
+								<p>Buy and Sell CryptoKitties for only 2% transaction fees.</p>
+								<ul class="actions">
+
+								<li><input type="button" value="Sell your Kitty" id="scrollToSell" /></li>
+
+								<script type="text/javascript">
+									$("#scrollToSell").click(function() {
+									    $('html, body').animate({
+									        scrollTop: $("#sellStart").offset().top
+									    }, 2000);
+									});
+								</script>
+
+								<li><input type="button" value="Purchase a Kitty" id="scrollToBuy" /></li>
+								
+								<script type="text/javascript">
+									$("#scrollToBuy").click(function() {
+									    $('html, body').animate({
+									        scrollTop: $("#buyStart").offset().top
+									    }, 2000);
+									});
+																			
+								</script>
+							</ul>
+							</div>
+
+						</header>
+
+
+						<!-- Content -->
+							<div class="wrapper">
+								<div class="inner">
+
+									<section>
+										<h3 class="major">What are we?</h3>
+										<p>We are a small group that decided to democratise the trading of our precious CryptoKitties. Through our application you can easily sell and purchase CryptoKitties whilst only incurring a small 2% transaction fee. We hope you enjoy using our application and helping us bring forth innovative advances in the flourishing CryptoKitty industry. </p>
+										<h4>But what do our users think?</h4>
+										<blockquote id="sellStart">With the ether I saved from my last 50 CryptoKitty purchases, I can now afford my 51st!</blockquote>
+										
+								</section>
+
+									<section>
+										<div >
+										<p> </p>
+										</div>
+										<div class="20u">
+										<h3 class="major">Sell your wonderful Kitty</h3>
+										<form action="" id="Sell">
+											<div class="row uniform">
+												<div class="6u">
+													<label for="address">Ethereum Address of Buyer</label>
+													<input type="text" name="address" id="address" value="" size="512" />
+												</div>
+												<div class="6u">
+													<label for="id">ID of your CryptoKitty</label>
+													<input type="text" name="id" id="id" value="" size="256" />
+												</div>
+												<div class="6u">
+													<label for="price">Price you're selling at (in Ethereum)</label>
+													<input type="text" step="any" min="0" name="sellPrice" id="sellPrice" value="" />
+												</div>
+												<div class="12u" id="buyStart">
+													<ul class="actions">
+														<li><input type="button" value="Set Trade" id="sellButton" /></li>
+														<li><input type="text" READONLY name="fullSellPrice" id="fullSellPrice" value="Price after fees"/></li>
+													</ul>
+												</div>
+											</div>
+										</form>
+										<script>
+										$(document).ready(function(){
+
+											$( "#sellPrice" ).keyup(function() {
+												var price = $( "#sellPrice" ).val();
+												$( "#fullSellPrice" ).val(price * 1.02);
+											});
+										});
+
+										</script>
+										<script type="text/javascript">
+											$( document ).ready(function() {
+												
+												/*var frmvalidator = new Validator("Sell");
+												frmvalidator.addValidation("address", "alphanumeric", "Must be a 256 bit hexadecimal");
+												frmvalidator.addValidation("address", "minLength=512", "Must be a 256 bit hexadecimal");
+												frmvalidator.addValidation("address", "maxLength=512", "Must be a 256 bit hexadecimal");
+												frmvalidator.addValidation("id", "num", "Must be a number");
+												frmvalidator.addValidation("id", "minLength=1", "Must be atleast 1 digit long");
+												frmvalidator.addValidation("id", "maxLength=256", "Must be a 256 bit hexadecimal");
+												frmvalidator.addValidation("price", "num", "Must be a number or float greater than 0.");
+*/												
+												console.log('Getting button');
+												var button = document.getElementById('sellButton');
+
+												button.onclick = function() {
+													console.log('User clicked sell');
+
+													console.log('Getting address');
+													var buyerAddress =  document.getElementById('address').value;
+
+													console.log('Engaging in Kittification.');
+													var kittyID = document.getElementById('id').value;
+													var price = document.getElementById('sellPrice').value;
+
+													console.log('Approving Transaction');
+													console.log(kittyID);
+													approveTransaction(document.getElementById('id').value);
+													setTrade(document.getElementById('sellPrice').value, document.getElementById('address').value);
+												}
+											});
+											
+										</script>
+
+										</div>
+										
+										<div class="20u" >
+										<h3 class="major" >Purchase a lovely Kitty</h3>
+										<form action="" id="Buy">
+											<div class="row uniform">
+												<div class="6u">
+													<label for="sellerAddress">Etherium address of the seller</label>
+													<input type="text" name="sellerAddress" id="sellerAddress" value="" size="512" />
+												</div>
+												<div class="6u">
+													<label for="kittyid">ID of the CryptoKitty you're buying</label>
+													<input type="text" name="kittyid" id="kittyid" value="" size="256" />
+												</div>
+												<div class="6u">
+													<label for="price">Price you're buying at (in Ethereum)</label>
+													<input type="text" name="price" id="price" value=""/>
+												</div>
+												<div class="12u">
+													<ul class="actions">
+														<li><input type="button" value="Set Trade" id="purchaseButton"  /></li>
+														<li><input type="text" READONLY name="fullPrice" id="fullPrice" value="Price after fees"/></li>
+													</ul>
+												</div>
+											</div>
+										</form>
+										<script>
+										$(document).ready(function(){
+
+											$( "#price" ).keyup(function() {
+												var price = $( "#price" ).val();
+												console.log(price);
+												$( "#fullPrice" ).val(price * 1.02);
+											});
+										});
+
+										</script>
+										<script type="text/javascript">
+											$(document).ready(function(){
+
+												/*var frmvalidator = new Validator("Buy");
+												frmvalidator.addValidation("sellerAddress", "alphanumeric", "Must be a 256 bit hexadecimal");
+												frmvalidator.addValidation("sellerAddress", "minLength=512", "Must be a 256 bit hexadecimal");
+												frmvalidator.addValidation("sellerAddress", "maxLength=512", "Must be a 256 bit hexadecimal");
+												frmvalidator.addValidation("kittyid", "num", "Must be a number");
+												frmvalidator.addValidation("kittyid", "minLength=1", "Must be atleast 1 digit long");
+												frmvalidator.addValidation("kittyid", "maxLength=256", "Must be a 256 bit hexadecimal");
+												frmvalidator.addValidation("price", "num", "Must be a number or float greater than 0.");
+												*/
+												var button = document.getElementById("purchaseButton");
+												
+												button.onclick = function() {
+													console.log("Purchase button clicked");
+													sellerAddress =  document.getElementById("sellerAddress").value;
+													kittyID = document.getElementById('kittyid').value;
+													price = document.getElementById('price').value;
+													console.log("Successfully retrieved values");
+
+													console.log(document.getElementById("sellerAddress").value);
+													console.log(document.getElementById('kittyid').value);
+													console.log(document.getElementById("price").value);
+
+													console.log("Executing Trade");
+													executeTrade(document.getElementById('kittyid').value, document.getElementById("sellerAddress").value, 1);
+												}
+											});
+										</script>
+										</div>
+
+									</section>
+
+								</div>
+							</div>
+
+					</section>
+
+					<section>
+									
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="inner">
+							<ul class="copyright">
+								<li>&copy; Aquilla Inc. All rights reserved.</li>
+								<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+											
+								<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../static/js/block.js"></script>
+
+			<script src="../../static/js/web3.min.js"></script>
+
+			<script src="../../static/js/gen_validatorv4.js"></script>
+
+	</body>
+</html>
