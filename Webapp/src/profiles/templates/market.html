@@ -39,7 +39,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="index.html">Kitty Market</a></h1>
+						<h1><a href="index.html">Tenancy Agreement Verifier</a></h1>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
@@ -49,26 +49,37 @@
 					<section id="wrapper">
 						<header>
 							<div class="inner">
-								<h2>The CryptoKitty Market</h2>
-								<p>Buy and Sell CryptoKitties for only 2% transaction fees.</p>
+								<h2>Tenancy Agreement Verifier</h2>
+								<p>Ensure the security and fairness of your tenancy agreement!</p>
 								<ul class="actions">
 
-								<li><input type="button" value="Sell your Kitty" id="scrollToSell" /></li>
+								<li><input type="button" value="Set up an agreement" id="scrollToSetup" /></li>
 
 								<script type="text/javascript">
-									$("#scrollToSell").click(function() {
+									$("#scrollToSetup").click(function() {
 									    $('html, body').animate({
-									        scrollTop: $("#sellStart").offset().top
+									        scrollTop: $("#setupBegin").offset().top
 									    }, 2000);
 									});
 								</script>
 
-								<li><input type="button" value="Purchase a Kitty" id="scrollToBuy" /></li>
+								<li><input type="button" value="Create a claim" id="scrollToClaim" /></li>
+								
+								<script type="text/javascript">
+									$("#scrollToClaim").click(function() {
+									    $('html, body').animate({
+									        scrollTop: $("#setupStart").offset().top
+									    }, 2000);
+									});
+																			
+								</script>
+
+								<li><input type="button" value="Judge a claim" id="scrollToVote" /></li>
 								
 								<script type="text/javascript">
 									$("#scrollToBuy").click(function() {
 									    $('html, body').animate({
-									        scrollTop: $("#buyStart").offset().top
+									        scrollTop: $("#judgeStart").offset().top
 									    }, 2000);
 									});
 																			
@@ -85,9 +96,14 @@
 
 									<section>
 										<h3 class="major">What are we?</h3>
-										<p>We are a small group that decided to democratise the trading of our precious CryptoKitties. Through our application you can easily sell and purchase CryptoKitties whilst only incurring a small 2% transaction fee. We hope you enjoy using our application and helping us bring forth innovative advances in the flourishing CryptoKitty industry. </p>
+										<p>Thousands of landlords and tenants are dealt with unfairly every single day. We are a small group with a grand ambition to ensure that all tenancy disputes are dealt with fairly and securely!	</p>									 
+										<p>The Tenancy Agreement Verifier is an Ethereum Smart Contract based system that securely stores your tenancy agreements and handles deposit disputes in a fair and decentralised manner. </p>
+										<p>At the start of the agreement, once both sides have signed the smart contract, the agreed upon deposit is stored on the blockchain. At the end of the tenancy, the deposit is returned to the tenant. </p>
+										<p>In the unlikely event that a tenant breaks the terms of his/her agreement, the landlord can raise a case through the system and provide evidence towards their claim. Multiple verified users will then be able to review the case and provide their judgement based on the evidence provided. </p> 
+										<p> Based on the votes of thee jurors, the claim will either pass causing the deposit to go to the landlord or it will fail thus allowing the tenancy to continue as normal.
+										Each time a landlord raises a case, a small fee will be taken. This fee will then be given to the jurors as a voting incentive. </p>
 										<h4>But what do our users think?</h4>
-										<blockquote id="sellStart">With the ether I saved from my last 50 CryptoKitty purchases, I can now afford my 51st!</blockquote>
+										<blockquote id="setupBegin">"For once I was able to rent accommodation and actually get my full deposit back at the end of my tenancy! This is the best invention since the electric motor and I certainly hope that it wins a well deserved Royal Hackaway prize!"</blockquote>
 										
 								</section>
 
@@ -96,68 +112,57 @@
 										<p> </p>
 										</div>
 										<div class="20u">
-										<h3 class="major">Sell your wonderful Kitty</h3>
+										<h3 class="major">Setup your tenancy agreement</h3>
 										<form action="" id="Sell">
 											<div class="row uniform">
 												<div class="6u">
-													<label for="address">Ethereum Address of Buyer</label>
+													<label for="address">Ethereum Address of Landlord</label>
 													<input type="text" name="address" id="address" value="" size="512" />
 												</div>
 												<div class="6u">
-													<label for="id">ID of your CryptoKitty</label>
-													<input type="text" name="id" id="id" value="" size="256" />
+													<label for="id">Deposit</label>
+													<input type="number" name="deposit" id="deposit" value="" size="256" />
 												</div>
 												<div class="6u">
-													<label for="price">Price you're selling at (in Ethereum)</label>
-													<input type="text" step="any" min="0" name="sellPrice" id="sellPrice" value="" />
+													<label for="name">Name of Tenant</label>
+													<input type="text" step="any" min="0" name="name" id="name" value="" />
 												</div>
-												<div class="12u" id="buyStart">
+												<div class="6u">
+													<label for="address">Ethereum Address of Tenant</label>
+													<input type="text" step="any" min="0" name="tenantAddress" id="tenantAddress" value="" />
+												</div>
+												<div class="12u" id="setupStart">
 													<ul class="actions">
-														<li><input type="button" value="Set Trade" id="sellButton" /></li>
-														<li><input type="text" READONLY name="fullSellPrice" id="fullSellPrice" value="Price after fees"/></li>
+														<li><input type="button" value="Setup Agreement" id="setupButton" /></li>
 													</ul>
 												</div>
 											</div>
 										</form>
-										<script>
-										$(document).ready(function(){
-
-											$( "#sellPrice" ).keyup(function() {
-												var price = $( "#sellPrice" ).val();
-												$( "#fullSellPrice" ).val(price * 1.02);
-											});
-										});
-
-										</script>
+									
 										<script type="text/javascript">
 											$( document ).ready(function() {
-												
-												/*var frmvalidator = new Validator("Sell");
-												frmvalidator.addValidation("address", "alphanumeric", "Must be a 256 bit hexadecimal");
-												frmvalidator.addValidation("address", "minLength=512", "Must be a 256 bit hexadecimal");
-												frmvalidator.addValidation("address", "maxLength=512", "Must be a 256 bit hexadecimal");
-												frmvalidator.addValidation("id", "num", "Must be a number");
-												frmvalidator.addValidation("id", "minLength=1", "Must be atleast 1 digit long");
-												frmvalidator.addValidation("id", "maxLength=256", "Must be a 256 bit hexadecimal");
-												frmvalidator.addValidation("price", "num", "Must be a number or float greater than 0.");
-*/												
+
 												console.log('Getting button');
-												var button = document.getElementById('sellButton');
+												var button = document.getElementById('setupButton');
 
 												button.onclick = function() {
 													console.log('User clicked sell');
 
-													console.log('Getting address');
-													var buyerAddress =  document.getElementById('address').value;
+													console.log('Getting landlord address');
+													var landlordAddress =  document.getElementById('address').value;
 
-													console.log('Engaging in Kittification.');
-													var kittyID = document.getElementById('id').value;
-													var price = document.getElementById('sellPrice').value;
+													console.log('Flinn is a talking carrot');
+													var tenantName = document.getElementById('tenantName').value;
+
+													console.log('Engaging in awesomeness.');
+													var tenantAddress = document.getElementById('tenantAddress').value;
+
+													console.log('Flinn is sucking a dick.');
+													var deposit = document.getElementById('deposit').value;
 
 													console.log('Approving Transaction');
-													console.log(kittyID);
-													approveTransaction(document.getElementById('id').value);
-													setTrade(document.getElementById('sellPrice').value, document.getElementById('address').value);
+
+													setupAgreement(landlordAddress, tenantName, tenantAddress, deposit);
 												}
 											});
 											
@@ -166,67 +171,42 @@
 										</div>
 										
 										<div class="20u" >
-										<h3 class="major" >Purchase a lovely Kitty</h3>
+										<h3 class="major">Create a claim against your tenant</h3>
 										<form action="" id="Buy">
 											<div class="row uniform">
 												<div class="6u">
-													<label for="sellerAddress">Etherium address of the seller</label>
-													<input type="text" name="sellerAddress" id="sellerAddress" value="" size="512" />
+													<label for="tenantAddress2">Etherium address of the tenant</label>
+													<input type="text" name="tenantAddress2" id="tenantAddress2" value="" size="512" />
 												</div>
 												<div class="6u">
-													<label for="kittyid">ID of the CryptoKitty you're buying</label>
-													<input type="text" name="kittyid" id="kittyid" value="" size="256" />
-												</div>
-												<div class="6u">
-													<label for="price">Price you're buying at (in Ethereum)</label>
-													<input type="text" name="price" id="price" value=""/>
+													<label for="claimDetails">Details regarding your claim.</label>
+													<input type="text" name="claimDetails" id="claimDetails" value="" size="1024" />
 												</div>
 												<div class="12u">
 													<ul class="actions">
-														<li><input type="button" value="Set Trade" id="purchaseButton"  /></li>
-														<li><input type="text" READONLY name="fullPrice" id="fullPrice" value="Price after fees"/></li>
+														<li id="judgeStart"><input type="button" value="Create Claim" id="createClaimButtom" /></li>
 													</ul>
 												</div>
 											</div>
 										</form>
-										<script>
-										$(document).ready(function(){
 
-											$( "#price" ).keyup(function() {
-												var price = $( "#price" ).val();
-												console.log(price);
-												$( "#fullPrice" ).val(price * 1.02);
-											});
-										});
-
-										</script>
 										<script type="text/javascript">
 											$(document).ready(function(){
 
-												/*var frmvalidator = new Validator("Buy");
-												frmvalidator.addValidation("sellerAddress", "alphanumeric", "Must be a 256 bit hexadecimal");
-												frmvalidator.addValidation("sellerAddress", "minLength=512", "Must be a 256 bit hexadecimal");
-												frmvalidator.addValidation("sellerAddress", "maxLength=512", "Must be a 256 bit hexadecimal");
-												frmvalidator.addValidation("kittyid", "num", "Must be a number");
-												frmvalidator.addValidation("kittyid", "minLength=1", "Must be atleast 1 digit long");
-												frmvalidator.addValidation("kittyid", "maxLength=256", "Must be a 256 bit hexadecimal");
-												frmvalidator.addValidation("price", "num", "Must be a number or float greater than 0.");
-												*/
-												var button = document.getElementById("purchaseButton");
+												var button = document.getElementById("createClaimButtom");
 												
 												button.onclick = function() {
-													console.log("Purchase button clicked");
-													sellerAddress =  document.getElementById("sellerAddress").value;
-													kittyID = document.getElementById('kittyid').value;
-													price = document.getElementById('price').value;
-													console.log("Successfully retrieved values");
+													console.log("Claim button clicked");
+													var tenantAddress =  document.getElementById("tenantAddress2").value;
+													var claimDetails = document.getElementById('claimDetails').value;
+													
+													console.log("Successfully retrieved images of Flinn being an idiot");
 
-													console.log(document.getElementById("sellerAddress").value);
-													console.log(document.getElementById('kittyid').value);
-													console.log(document.getElementById("price").value);
+													console.log(document.getElementById("tenantAddress2").value);
+													console.log(document.getElementById('claimDetails').value);
 
-													console.log("Executing Trade");
-													executeTrade(document.getElementById('kittyid').value, document.getElementById("sellerAddress").value, 1);
+													console.log("Generating Claim");
+													generateClaim(claimDetails, tenantAddres);
 												}
 											});
 										</script>
