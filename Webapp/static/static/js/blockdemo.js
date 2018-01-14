@@ -1,4 +1,3 @@
-function beginClaim(details, tenant_address){
 
 	var selectElement = document.getElementById('selectNumber'),
 
@@ -42,6 +41,8 @@ function report(claimId) {
 
   }
 
+ function beginClaim(details, tenant_address){
+
     var TenancyContract = window.web3.eth.contract(tenancyContractABI());
 
     var core = TenancyContract.at('0x250be4dc2186e6fd7d060e7f4e78a233dadfcc8d');
@@ -52,6 +53,10 @@ function report(claimId) {
 
 
     function getNoOfClaims(){
+
+    	var TenancyContract = window.web3.eth.contract(tenancyContractABI());
+
+    	var core = TenancyContract.at('0x250be4dc2186e6fd7d060e7f4e78a233dadfcc8d');
 
     	return (core.noOfClaims.call());
     }
