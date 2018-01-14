@@ -4,7 +4,7 @@ import './TenancyCoin.sol';
 
 contract TenancyContract {
 
-    uint noOfClaims = 0;   
+    uint public noOfClaims = 0;   
     uint voterFee = 0;
 
     struct Voter {
@@ -13,7 +13,6 @@ contract TenancyContract {
 
     struct Tenant {
         bytes32 name;   // short name (up to 32 bytes)
-        uint totalOwed;
         uint paidBond;
         bool hasVal; // default value is false
         mapping(address => Voter) voters;
@@ -45,6 +44,7 @@ contract TenancyContract {
     function TenancyContract(uint _bondPrice){
         bondPrice = _bondPrice;
         owner = msg.sender;
+        
         token = createTokenContract();
 
     }
@@ -53,25 +53,23 @@ contract TenancyContract {
     function addTenant(address t, bytes32 nameToAdd) {
         require((msg.sender == landlord) && (!tenants[t].hasVal));
 
-        mapping(address => Voter) tempVoters;
 
         LogAddTenant(t, nameToAdd);
         tenants[t] = Tenant({
             name: nameToAdd, 
             paidBond: bondPrice,
             hasVal: true,
-            voters: tempVoters,
             voteCount: 0
         });
     }
 
     //Can only be done by the Landlord
-    function beginClaim(string apparantDetails, address atenantAddress){
+    function beginClaim(string apparantDetails, address atenantAddress) returns (uint){
 
         claims[noOfClaims] = Claim({
             claimStatus: false,
             claimDetails: apparantDetails,
-            claimEnd: block.length + 10,
+            claimEnd: block.number + 10,
             tenantAddress: atenantAddress
         });
 
@@ -85,16 +83,14 @@ contract TenancyContract {
     //That is not how we want it to work however. We must ensure that this function can only be called if the tenant address is a key in tentants.
 
     //If msg.value is not defined then it will be 0. (or the caller might get a transaction error).
-    function pay() public payable returns (uint) {
+    function pay() public payable{
         tenants[msg.sender].paidBond += msg.value;
         LogPaymentMade(msg.sender, msg.value);
-        return tenants[msg.sender].totalOwed - tenants[msg.sender].paidBond;
     }
 
     //Returns all the data for a tenant.
-    function getTenant(address _address) public constant returns (bytes32, uint, uint, bool) {
-        return (tenants[_address].name, tenants[_address].totalOwed,
-                tenants[_address].paidBond, tenants[_address].hasVal);
+    function getTenant(address _address) public constant returns (bytes32, uint, bool) {
+        return (tenants[_address].name, tenants[_address].paidBond, tenants[_address].hasVal);
     }
 
     //The voting function. Called when a user votes for either the tenant or the landlord.
@@ -119,7 +115,7 @@ contract TenancyContract {
     //ONLY RUN BY THE LANDLORD
     function makeDecision(uint claimID) onlyLandlord{
         //TODO: alter require so that the competition ends after a fixed amount of time not a voteCount
-       require(claims[claimID].claimEnd >= block.length);
+       require(claims[claimID].claimEnd >= block.number);
     
         if(voteLandOwner >= voteTenant){
             //transfer money to the person that calls makeDecision Currently
@@ -151,7 +147,7 @@ contract TenancyContract {
     //Empties the "voters" dictionary.
     //As this is called by the tenant when a new dispute occurs, we need the tenant address to be passed in as an argument.
     function renewVote(address _address, uint claimID){
-        require(claims[claimID].claimEnd >= block.length);
+        require(claims[claimID].claimEnd >= block.number);
         tenants[_address].voters[msg.sender].hasVoted = false;
     }
 
@@ -175,7 +171,7 @@ contract TenancyContract {
 
     }
 
-    function createTokenContract() internal returns (MintableToken) {
+    function createTokenContract() internal returns (TenancyCoin) {
         return new TenancyCoin();
     }
 

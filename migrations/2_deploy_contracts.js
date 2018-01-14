@@ -8,5 +8,5 @@ module.exports = function(deployer) {
 
   //deployer.deploy(FlinnCoinSale, startBlock, endBlock, rate, wallet, cap);
 
-  deployer.deploy(Listen, web3.toWei("ether",1));
+  deployer.deploy(Listen, 1000000000000000000);
 };
