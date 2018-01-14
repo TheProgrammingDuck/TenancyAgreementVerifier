@@ -41,7 +41,7 @@ function report(claimId) {
 
   }
 
- function beginClaim(details, tenant_address){
+ function generateClaim(details, tenant_address){
 
     var TenancyContract = window.web3.eth.contract(tenancyContractABI());
 
@@ -50,14 +50,55 @@ function report(claimId) {
     core.beginClaim(details, tenant_address, {from:window.web3.eth.accounts[0], gas:400000}, function(err){
     });
     console.log('Claim against Tenant:' + tenant_address + 'initiated');
+}
 
 
-    function getNoOfClaims(){
+function getNoOfClaims(){
 
-    	var TenancyContract = window.web3.eth.contract(tenancyContractABI());
+  var TenancyContract = window.web3.eth.contract(tenancyContractABI());
 
-    	var core = TenancyContract.at('0x250be4dc2186e6fd7d060e7f4e78a233dadfcc8d');
+  var core = TenancyContract.at('0x250be4dc2186e6fd7d060e7f4e78a233dadfcc8d');
 
-    	return (core.noOfClaims.call());
-    }
+  return (core.noOfClaims.call());
+}
+
+
+function submitVote(tenantAddress, vote){
+
+    var TenancyContract = window.web3.eth.contract(tenancyContractABI());
+
+    var core = TenancyContract.at('0x250be4dc2186e6fd7d060e7f4e78a233dadfcc8d');
+
+    core.arbitrate(tenantAddress, vote, {from:window.web3.eth.accounts[0], gas:400000}, function(err){
+    });
+    console.log(tenantAddress + 'voted');
+
+}
+
+
+function setupAgreement(landlordAddress, tenantName, tenantAddress, deposit){
+
+    //IN future do something wacky like instantiate contract etc.    
+
+    var TenancyContract = window.web3.eth.contract(tenancyContractABI());
+
+    var core = TenancyContract.at('0x250be4dc2186e6fd7d060e7f4e78a233dadfcc8d');
+
+    core.addTenant(tenantAddress, tenantName, {from:window.web3.eth.accounts[0], gas:400000}, function(err){
+    });
+    console.log(tenantName + 'added to the list of tenants');
+}
+
+
+function payDeposit(depositPrice){
+
+    var TenancyContract = window.web3.eth.contract(tenancyContractABI());
+
+    var core = TenancyContract.at('0x250be4dc2186e6fd7d060e7f4e78a233dadfcc8d');
+
+    core.pay({from:window.web3.eth.accounts[0], value: depositPrice, gas:400000}, function(err){
+    });
+    console.log(tenantName + 'added to the list of tenants');
+
+
 }
