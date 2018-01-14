@@ -215,6 +215,37 @@
 										</div>
 
 										<div class="20u" >
+										<h3 class="major">End claim and evaluate judging results</h3>
+
+										<div class="6u">
+													<label for="tenantAddress2">Claim ID</label>
+													<input type="number" name="claimID" id="claimID" value="" />
+										</div>
+
+										<div class="12u">
+											<ul class="actions">
+												<li id="End Claim"><input type="button" value="End Claim" id="endClaimButton" /></li>
+											</ul>
+										</div>
+
+										<script type="text/javascript">
+											$(document).ready(function(){
+
+												var button = document.getElementById("endClaimButton");
+												
+												button.onclick = function() {
+
+													var claimId = document.getElementById('claimID').value;
+
+													makeDecision(claimId);
+													console.log("Claim button clicked");
+
+													}
+											});
+										</script>
+										</div>
+
+										<div class="20u" >
 										<h3 class="major">Judge a Tenancy Agreement claim</h3>
 
 										<form id="myForm">

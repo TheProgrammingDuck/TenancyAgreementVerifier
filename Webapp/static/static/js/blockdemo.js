@@ -37,7 +37,10 @@ function report(claimId) {
     //2. Creates a new paragraph in frontend to display it.
 
     var claimDetails = document.getElementById('blockchainClaimDetails');
-    claimDetails.textContent = "potato";
+
+    var details = getClaimDetails(claimId);
+
+    claimDetails.textContent = details;
 
   }
 
@@ -98,7 +101,29 @@ function payDeposit(depositPrice){
 
     core.pay({from:window.web3.eth.accounts[0], value: window.web3.toWei(depositPrice, "ether"), gas:400000}, function(err){
     });
-    console.log(tenantName + 'added to the list of tenants');
 
+    console.log('The deposit has been paid');
 
+}
+
+function makeDecision(claimId){
+
+	var TenancyContract = window.web3.eth.contract(tenancyContractABI());
+
+    var core = TenancyContract.at('0x250be4dc2186e6fd7d060e7f4e78a233dadfcc8d');
+
+    core.makeDecision(claimId, {from:window.web3.eth.accounts[0], value: window.web3.toWei(depositPrice, "ether"), gas:400000}, function(err){
+    });
+
+    console.log('Decision has been made, Voting has been closed.');
+
+}
+
+function getClaimDetails(claimId){
+
+	var TenancyContract = window.web3.eth.contract(tenancyContractABI());
+
+    var core = TenancyContract.at('0x250be4dc2186e6fd7d060e7f4e78a233dadfcc8d');
+
+    return (core.claims.call([claimId].claimDetails));
 }
