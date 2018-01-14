@@ -4,6 +4,10 @@ import './TenancyCoin.sol';
 
 contract TenancyContract {
 
+    uint claimId; 
+    uint noOfClaims = 0;   
+    uint voterFee;
+
     struct Tenant {
         bytes32 name;   // short name (up to 32 bytes)
         uint totalOwed;
@@ -13,10 +17,18 @@ contract TenancyContract {
         uint voteCount;
     }
 
+    struct Claim {
+        //True == Completed, False == Pending
+        bool claimStatus;   
+        string claimDetails;
+        address tenantAddress;
+    }
+
     struct Voter {
         bool hasVoted; //default is false
     }
 
+    mapping(claimId => Claim) public claims;
     mapping(address => Tenant) public tenants;
     mapping(address => bool) public decisionMap;
     address public landlord;
@@ -46,13 +58,28 @@ contract TenancyContract {
 
         LogAddTenant(t, nameToAdd);
         tenants[t] = Tenant({
-            name: nameToAdd,
+            name: nameToAdd, 
             totalOwed: owed,
             paidBond: paid,
             hasVal: true,
-            voters: {}
+            voters: {},
             voteCount = 0;
         });
+    }
+
+    //Can only be done by the Landlord
+    function beginClaim(bool currentClaimStatus, string apparantDetails, address atenantAddress){
+
+        claims[noOfClaims] = Claim({
+            claimStatus: currentClaimStatus,
+            claimDetails: apparantDetails,
+            tenantAddress: atenantAddress
+        });
+
+        noOfClaims += 1;
+
+        //returning the claimId
+        return (noOfClaims-1);
     }
 
     //Currently, if the pay function is called by a non-tenant, it will still work by creating a new tenant with that key-value pair.
@@ -87,19 +114,19 @@ contract TenancyContract {
 
         tenants[_tenantAddress].voters[msg.sender].hasVoted= true;
         //The voter gets paid for making their vote.
-        _payVoter();
+        _payVoter(_tenantAddress);
 
     }
 
     //Called when a disagreement has occurred between the tenant and the landlord. After voters are done voting on the issue, a decision is made based on the vote results.
-    //ONLY RUN BY OUR SERVER
-    function makeDecision(){
+    //ONLY RUN BY THE LANDLORD
+    function makeDecision(uint claimID){
         //TODO: alter voteCount for all voting competitions
         require(voteCount >= 2);
-        //TODO: voteTenenant and voteLandOwner for all voting competitions
+        //TODO: voteTenant and voteLandOwner for all voting competitions
         if(voteLandOwner >= voteTenant){
             //transfer money to the person that calls makeDecision Currently
-            msg.sender.transfer(tenants[msg.sender].paidBond);
+            msg.sender.transfer(tenants[claims[claimID].tenantAddress].paidBond);
             //decisionMap[msg.sender] = true;
         }
 
@@ -133,10 +160,25 @@ contract TenancyContract {
         tenants[_address].voters={};
     }
 
-    function _payVoter() internal{
-        //TODO: Pay the voters
+    //Each voter gets 1% of the Bond. 
+    //We reduce 
+    function _payVoter(address _tenantAddress) internal{
 
-        
+        require(msg.sender != 0x0);
+
+        //Note: New smartcontract instance per landlord. 
+        //Voter Fee is only recovered from the landlord as it's the landlord that has the bond/deposit.
+        voterFee += tenants[_tenantAddress].paidBond/100;
+        token.mint(msg.sender, 10);
+
+        tenants[_tenantAddress].paidBond -= voterFee;
+
+    }
+
+    //Withdraw from landlord after voters get paid. (This is our fee.)
+    function _withdrawFunds() internal{
+
+
     }
 
 
@@ -145,7 +187,6 @@ contract TenancyContract {
     function createTokenContract() internal returns (MintableToken) {
         return new TenancyCoin();
     }
-
 
 
 }
