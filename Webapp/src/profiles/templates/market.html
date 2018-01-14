@@ -77,7 +77,7 @@
 								<li><input type="button" value="Judge a claim" id="scrollToVote" /></li>
 								
 								<script type="text/javascript">
-									$("#scrollToBuy").click(function() {
+									$("#scrollToVote").click(function() {
 									    $('html, body').animate({
 									        scrollTop: $("#judgeStart").offset().top
 									    }, 2000);
@@ -206,7 +206,7 @@
 													console.log(document.getElementById('claimDetails').value);
 
 													console.log("Generating Claim");
-													generateClaim(claimDetails, tenantAddres);
+													generateClaim(claimDetails, tenantAddress);
 												}
 											});
 										</script>
@@ -224,11 +224,11 @@
 													<label >Your Vote</label>
 												</div>
 												<div>
-												    <input type="radio" value=true id="VoteForLandlord"
+												    <input type="radio" value=false id="VoteForLandlord"
 												     name="VoteforLandlord">
 												    <label for="VoteForLandlord">Landlord is correct</label>
 
-												    <input type="radio" value=false id="VoteForTenant"
+												    <input type="radio" value=true id="VoteForTenant"
 												     name="VoteForTenant">
 												    <label for="VoteForTenant">Tenant is correct</label>
 
@@ -249,16 +249,22 @@
 												
 												button.onclick = function() {
 													console.log("Submit vote button clicked");
-													var tenantAddress =  document.getElementById("tenantAddress2").value;
-													var claimDetails = document.getElementById('claimDetails').value;
+													var tenantAddress =  document.getElementById("tenantAddress3").value;
+													var vote;
+
+													if ( document.getElementById('VoteForLandlord').checked){
+														vote = document.getElementById('VoteForLandlord').value;
+													}
+													if ( document.getElementById('VoteForTenant').checked){
+														vote = document.getElementById('VoteForTenant').value;
+													}
 													
-													console.log("Successfully retrieved images of Flinn being an idiot");
+													console.log("Successfully retrieved radio information");
 
-													console.log(document.getElementById("tenantAddress2").value);
-													console.log(document.getElementById('claimDetails').value);
+													console.log(document.getElementById("tenantAddress3").value);
 
-													console.log("Generating Claim");
-													generateClaim(claimDetails, tenantAddres);
+													console.log("Sending Vote");
+													generateClaim(tenantAddress, vote);
 												}
 											});
 										</script>

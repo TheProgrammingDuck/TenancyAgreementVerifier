@@ -95,6 +95,7 @@ contract TenancyContract {
 
     //The voting function. Called when a user votes for either the tenant or the landlord.
     //This should only be called by the voter, not the landlord or the tenant.
+    //If vote==false, vote is for landowner. If vote==true, vote is for the tenant.
     function arbitrate(address _tenantAddress, bool vote){
 
             if(!vote){
