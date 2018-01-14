@@ -100,9 +100,9 @@
 										<h3 class="major">What are we?</h3>
 										<p>Thousands of landlords and tenants are dealt with unfairly every single day. We are a small group with a grand ambition to ensure that all tenancy disputes are dealt with fairly and securely!	</p>									 
 										<p>The Tenancy Agreement Verifier is an Ethereum Smart Contract based system that securely stores your tenancy agreements and handles deposit disputes in a fair and decentralised manner. </p>
-										<p>At the start of the agreement, once both sides have signed the smart contract, the agreed upon deposit is stored on the blockchain. At the end of the tenancy, the deposit is returned to the tenant. </p>
+										<p>At the start of the agreement, once both sides have signed the smart contract, the agreed upon deposit is stored on the smart contract. At the end of the tenancy, the deposit is returned to the tenant. </p>
 										<p>In the unlikely event that a tenant breaks the terms of his/her agreement, the landlord can raise a case through the system and provide evidence towards their claim. Multiple verified users will then be able to review the case and provide their judgement based on the evidence provided. </p> 
-										<p> Based on the votes of thee jurors, the claim will either pass causing the deposit to go to the landlord or it will fail thus allowing the tenancy to continue as normal.
+										<p> Based on the votes of the jurors, the claim will either pass causing the deposit to go to the landlord or it will fail thus allowing the tenancy to continue as normal.
 										Each time a landlord raises a case, a small fee will be taken. This fee will then be given to the jurors as a voting incentive. </p>
 										<h4>But what do our users think?</h4>
 										<blockquote id="setupBegin">"For once I was able to rent accommodation and actually get my full deposit back at the end of my tenancy! This is the best invention since the electric motor and I certainly hope that it wins a well deserved Royal Hackaway prize!"</blockquote>
@@ -176,6 +176,11 @@
 										<div class="20u">
 										<h3 class="major">Pay your deposit (for tenant)</h3>
 
+										<div>
+											<label for="id">Deposit</label>
+											<input type="text" name="payDeposit" id="payDeposit" value="" size="512" />
+										</div>
+
 										<div class="12u" id="payDeposit">
 											<ul class="actions">
 												<li><input type="button" value="Pay Deposit" id="payDepositButton" /></li>
@@ -191,7 +196,9 @@
 												button.onclick = function() {
 													console.log('User clicked payDepositButton');
 
-													payDeposit();
+													var deposit = document.getElementById('payDeposit').value;
+
+													payDeposit(deposit);
 												}
 											});
 											
@@ -199,9 +206,6 @@
 
 										</div>
 
-
-
-										
 										<div class="20u" >
 										<h3 class="major">Create a claim against your tenant</h3>
 										<form action="" id="Create">

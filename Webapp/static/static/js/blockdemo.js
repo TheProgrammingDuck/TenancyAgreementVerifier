@@ -101,7 +101,9 @@ function payDeposit(depositPrice){
 
     var core = TenancyContract.at('0x250be4dc2186e6fd7d060e7f4e78a233dadfcc8d');
 
-    core.pay({from:window.web3.eth.accounts[0], value: window.web3.toWei(depositPrice, "ether"), gas:400000}, function(err){
+    var deposit = parseInt(depositPrice);
+
+    core.pay({from:window.web3.eth.accounts[0], value: window.web3.toWei(deposit, "ether"), gas:400000}, function(err){
     });
 
     console.log('The deposit has been paid');
