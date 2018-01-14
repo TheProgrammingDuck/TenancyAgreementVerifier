@@ -1,5 +1,5 @@
 
-	var selectElement = document.getElementById('selectNumber'),
+	var selectElement = document.getElementById('selectNumber');
 
   function populateSelectElement (element, array) {
       var newElement,
