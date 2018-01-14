@@ -1,10 +1,6 @@
 function beginClaim(details, tenant_address){
 
 	var selectElement = document.getElementById('selectNumber'),
-      //1. Call some smart contract function that returns NoOfCases
-      //2. Create OptionArray of that length.
-
-      optionArray = [1, 2, 3, 4, 5];
 
   function populateSelectElement (element, array) {
       var newElement,
@@ -18,8 +14,24 @@ function beginClaim(details, tenant_address){
   }
 
   selectElement.addEventListener('click', function() {
+
+  	var noClaims = getNoOfClaims();
+
+  	var optionArray = [];
+
+  	for(i = 0; i < noClaims; i += 1){
+  		optionArray.push(i);
+  	}
+
       populateSelectElement(this, optionArray);
   });
+
+  function scrollIntoView(elementID) {
+   var e = document.getElementById(elementID);
+   if (!!e && e.scrollIntoView) {
+       e.scrollIntoView();
+   }
+}
 
 function report(claimId) {
     //1. Uses claimId to return claim details from blockchain
@@ -39,4 +51,8 @@ function report(claimId) {
     console.log('Claim against Tenant:' + tenant_address + 'initiated');
 
 
+    function getNoOfClaims(){
+
+    	return (core.noOfClaims.call());
+    }
 }
