@@ -1,8 +1,12 @@
-var ConvertLib = artifacts.require("./ConvertLib.sol");
-var MetaCoin = artifacts.require("./MetaCoin.sol");
+
+var Listen = artifacts.require('./TenancyContract.sol');
 
 module.exports = function(deployer) {
-  deployer.deploy(ConvertLib);
-  deployer.link(ConvertLib, MetaCoin);
-  deployer.deploy(MetaCoin);
+
+
+  //const address = 0x155aa299e29abe2ddbe5dced4c051f8f5268c0a9;
+
+  //deployer.deploy(FlinnCoinSale, startBlock, endBlock, rate, wallet, cap);
+
+  deployer.deploy(Listen, web3.toWei("ether",1));
 };

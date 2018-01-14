@@ -1,0 +1,25 @@
+{
+  "name": "tenancyagreementverifier",
+  "version": "1.0.0",
+  "description": "Vishal is lame",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheProgrammingDuck/TenancyAgreementVerifier.git"
+  },
+  "author": "Flinn+Vish",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheProgrammingDuck/TenancyAgreementVerifier/issues"
+  },
+  "homepage": "https://github.com/TheProgrammingDuck/TenancyAgreementVerifier#readme",
+  "dependencies": {
+    "zeppelin-solidity": "^1.5.0"
+  }
+}
