@@ -87,6 +87,8 @@ function setupAgreement(landlordAddress, tenantName, tenantAddress, deposit){
 
     var core = TenancyContract.at('0x250be4dc2186e6fd7d060e7f4e78a233dadfcc8d');
 
+    var deposit = parseInt(deposit);
+
     core.addTenant(tenantAddress, tenantName, {from:window.web3.eth.accounts[0], gas:400000}, function(err){
     });
     console.log(tenantName + 'added to the list of tenants');

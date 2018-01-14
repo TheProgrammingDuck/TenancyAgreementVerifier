@@ -123,7 +123,7 @@
 												</div>
 												<div>
 													<label for="id">Deposit</label>
-													<input type="number" name="deposit" id="deposit" value="" size="256" />
+													<input type="text" name="deposit" id="deposit" value="" size="512" />
 												</div>
 												<div class="6u">
 													<label for="name">Name of Tenant</label>
@@ -151,13 +151,16 @@
 													console.log('User clicked setupButton');
 
 													console.log('Getting landlord address');
-													var landlordAddress =  document.getElementById('address').value;
+													var landlordAddress =  document.getElementById('address').value;#
+													console.log(landlordAddress);
 
 													console.log('Flinn is a talking carrot');
 													var tenantName = document.getElementById('tenantName').value;
+													console.log(tenantName);
 
 													console.log('Engaging in awesomeness.');
 													var tenantAddress = document.getElementById('tenantAddress').value;
+													console.log(tenantAddress);
 
 													console.log('Flinn is sucking a dick.');
 													var deposit = document.getElementById('deposit').value;
@@ -185,7 +188,7 @@
 											$( document ).ready(function() {
 
 												console.log('Getting button');
-												var button = document.getElementById('setupButton');
+												var button = document.getElementById('payDepositButton');
 
 												button.onclick = function() {
 													console.log('User clicked payDepositButton');
