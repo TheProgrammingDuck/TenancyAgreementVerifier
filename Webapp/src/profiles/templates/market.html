@@ -172,7 +172,7 @@
 										
 										<div class="20u" >
 										<h3 class="major">Create a claim against your tenant</h3>
-										<form action="" id="Buy">
+										<form action="" id="Create">
 											<div class="row uniform">
 												<div class="6u">
 													<label for="tenantAddress2">Etherium address of the tenant</label>
@@ -184,7 +184,7 @@
 												</div>
 												<div class="12u">
 													<ul class="actions">
-														<li id="judgeStart"><input type="button" value="Create Claim" id="createClaimButtom" /></li>
+														<li id="judgeStart"><input type="button" value="Create Claim" id="createClaimButton" /></li>
 													</ul>
 												</div>
 											</div>
@@ -193,10 +193,62 @@
 										<script type="text/javascript">
 											$(document).ready(function(){
 
-												var button = document.getElementById("createClaimButtom");
+												var button = document.getElementById("createClaimButton");
 												
 												button.onclick = function() {
 													console.log("Claim button clicked");
+													var tenantAddress =  document.getElementById("tenantAddress2").value;
+													var claimDetails = document.getElementById('claimDetails').value;
+													
+													console.log("Successfully retrieved images of Flinn being an idiot");
+
+													console.log(document.getElementById("tenantAddress2").value);
+													console.log(document.getElementById('claimDetails').value);
+
+													console.log("Generating Claim");
+													generateClaim(claimDetails, tenantAddres);
+												}
+											});
+										</script>
+										</div>
+
+										<div class="20u" >
+										<h3 class="major">Judge a Tenancy Agreement claim</h3>
+										<form action="" id="Create">
+											<div class="row uniform">
+												<div class="6u">
+													<label for="tenantAddress2">Etherium address of the tenant</label>
+													<input type="text" name="tenantAddress3" id="tenantAddress3" value="" size="512" />
+												</div>
+												<div class="6u">
+													<label >Your Vote</label>
+												</div>
+												<div>
+												    <input type="radio" value=true id="VoteForLandlord"
+												     name="VoteforLandlord">
+												    <label for="VoteForLandlord">Landlord is correct</label>
+
+												    <input type="radio" value=false id="VoteForTenant"
+												     name="VoteForTenant">
+												    <label for="VoteForTenant">Tenant is correct</label>
+
+
+												</div>
+												<div class="12u">
+													<ul class="actions">
+														<li><input type="button" value="Submit Vote" id="submitVoteButton" /></li>
+													</ul>
+												</div>
+											</div>
+										</form>
+
+										<script type="text/javascript">
+											$(document).ready(function(){
+
+												var button = document.getElementById("submitVoteButton");
+												
+												button.onclick = function() {
+													console.log("Submit vote button clicked");
 													var tenantAddress =  document.getElementById("tenantAddress2").value;
 													var claimDetails = document.getElementById('claimDetails').value;
 													

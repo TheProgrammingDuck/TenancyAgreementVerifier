@@ -53,12 +53,14 @@ contract TenancyContract {
     function addTenant(address t, bytes32 nameToAdd) {
         require((msg.sender == landlord) && (!tenants[t].hasVal));
 
+        mapping(address => Voter) tempVoters;
+
         LogAddTenant(t, nameToAdd);
         tenants[t] = Tenant({
             name: nameToAdd, 
             paidBond: bondPrice,
             hasVal: true,
-            //voters: {},
+            voters: tempVoters,
             voteCount: 0
         });
     }
@@ -101,13 +103,11 @@ contract TenancyContract {
 
             if(!vote){
                 voteLandOwner = voteLandOwner + 1;
-
             }
 
             else {
                 voteTenant = voteTenant + 1;
             }
-        }
 
         tenants[_tenantAddress].voters[msg.sender].hasVoted = true;
         //The voter gets paid for making their vote.
@@ -123,11 +123,11 @@ contract TenancyContract {
     
         if(voteLandOwner >= voteTenant){
             //transfer money to the person that calls makeDecision Currently
-            msg.sender.transfer(tenants[claims[claimID].tenantAddress.paidBond);
+            msg.sender.transfer(tenants[claims[claimID].tenantAddress].paidBond);
             //decisionMap[msg.sender] = true;
         }
         //TODO: fix clean
-        _clean();
+        _clean(claimID);
 
     }
 
@@ -139,7 +139,9 @@ contract TenancyContract {
 
     //Empties the votes
     //TODO:MAKEITWORK
-    function _clean() internal {
+    function _clean(uint claimID) internal {
+
+        claims[claimID].claimStatus = true;
 
         voteTenant = 0;
         voteLandOwner = 0;
