@@ -65,6 +65,17 @@
 									});
 								</script>
 
+								<li><input type="button" value="Pay Deposit" id="scrollToPay" /></li>
+
+								<script type="text/javascript">
+									$("#scrollToPay").click(function() {
+									    $('html, body').animate({
+									        scrollTop: $("#startPay").offset().top
+									    }, 2000);
+									});
+								</script>
+
+
 								<li><input type="button" value="Create a claim" id="scrollToClaim" /></li>
 								
 								<script type="text/javascript">
@@ -85,6 +96,16 @@
 									    }, 2000);
 									});
 																			
+								</script>
+
+								<li><input type="button" value="End judging" id="scrollToEnd" /></li>
+
+								<script type="text/javascript">
+									$("#scrollToEnd").click(function() {
+									    $('html, body').animate({
+									        scrollTop: $("#startEnd").offset().top
+									    }, 2000);
+									});
 								</script>
 							</ul>
 							</div>
@@ -135,7 +156,7 @@
 												</div>
 												<div class="12u" id="setupStart">
 													<ul class="actions">
-														<li><input type="button" value="Setup Agreement" id="setupButton" /></li>
+														<li id= "startPay"><input type="button" value="Setup Agreement" id="setupButton" /></li>
 													</ul>
 												</div>
 											</div>
@@ -248,7 +269,7 @@
 										</script>
 										</div>
 
-										<div class="20u" >
+										<div class="20u" id ="startEnd">
 										<h3 class="major">End claim and evaluate judging results</h3>
 
 										<div class="6u">
@@ -293,7 +314,7 @@
 										<form action="" id="Create">
 											<div class="row uniform">
 												<div class="6u">
-													<label for="tenantAddress2">Etherium address of the tenant</label>
+													<label for="tenantAddress2">Ethereum address of the tenant</label>
 													<input type="text" name="tenantAddress3" id="tenantAddress3" value="" size="512" />
 												</div>
 												<div class="6u">
