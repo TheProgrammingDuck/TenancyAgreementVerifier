@@ -1301,6 +1301,36 @@ function kittyCoreABI(){
 
 }
 
+  var selectElement = document.getElementById('selectNumber'),
+      //1. Call some smart contract function that returns NoOfCases
+      //2. Create OptionArray of that length.
+
+      optionArray = [1, 2, 3, 4, 5];
+
+  function populateSelectElement (element, array) {
+      var newElement,
+          i;
+      for(i = 0; i < array.length; i += 1) {
+          newElement = document.createElement('option');
+          newElement.textContent = optionArray[i];
+          newElement.value = optionArray[i];
+          element.appendChild(newElement);
+      }
+  }
+
+  selectElement.addEventListener('click', function() {
+      populateSelectElement(this, optionArray);
+  });
+
+function report(claimId) {
+    //1. Uses claimId to return claim details from blockchain
+    //2. Creates a new paragraph in frontend to display it.
+
+    var claimDetails = document.getElementById('blockchainClaimDetails');
+    claimDetails.textContent = "potato";
+
+  }
+
 function scrollIntoView(elementID) {
    var e = document.getElementById(elementID);
    if (!!e && e.scrollIntoView) {

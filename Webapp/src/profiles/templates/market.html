@@ -49,7 +49,9 @@
 					<section id="wrapper">
 						<header>
 							<div class="inner">
+								<h3><img style= "width: 80px; float: left" src= "../../static/img/Logo.png" />
 								<h2>Tenancy Agreement Verifier</h2>
+
 								<p>Ensure the security and fairness of your tenancy agreement!</p>
 								<ul class="actions">
 
@@ -214,6 +216,15 @@
 
 										<div class="20u" >
 										<h3 class="major">Judge a Tenancy Agreement claim</h3>
+
+										<form id="myForm">
+										    <select id="selectNumber" onchange="report(this.value)">
+										        <option>Choose a number</option>
+										    </select>
+										</form>
+
+										<p id="blockchainClaimDetails"></p>
+
 										<form action="" id="Create">
 											<div class="row uniform">
 												<div class="6u">
