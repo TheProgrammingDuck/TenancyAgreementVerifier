@@ -61,8 +61,17 @@ function getNoOfClaims(){
   var TenancyContract = window.web3.eth.contract(tenancyContractABI());
 
   var core = TenancyContract.at('0x250be4dc2186e6fd7d060e7f4e78a233dadfcc8d');
+  var claim;
+  core.noOfClaims.call(function(e,comp){
+    if (!e){
+      claim = console.log(parseInt(comp));
+    }
+    else{
+      claim = null;
+    }
+  });
 
-  return (core.noOfClaims.call());
+  return claim;
 }
 
 
